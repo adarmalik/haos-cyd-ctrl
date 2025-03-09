@@ -1,0 +1,120 @@
+#        - obj: # a properly placed coontainer object for all these controls
+            layout: # enable the GRID layout for the children widgets
+              type: GRID # split the rows and the columns proportionally
+              grid_columns: [FR(1), FR(1), FR(1), FR(1)] # equal
+              grid_rows: [FR(50), FR(50), FR(50)] # like percents
+            width: 796
+            height: 436
+            pad_all: 15
+            bg_opa: TRANSP
+            border_opa: TRANSP
+            widgets:
+              - button: !include
+                    file: push_button.yaml
+                    vars:
+                        page: 2
+                        col: 0
+                        row: 0
+                        btn_icon: "\U000F111E"
+                        btn_text: "Küche AUF"
+                        btn_action: shutter_kitchen_up
+              - button: !include
+                    file: push_button.yaml
+                    vars:
+                        page: 2
+                        col: 0
+                        row: 1
+                        btn_icon: "\U000F111C"
+                        btn_text: "Küche ZU"
+                        btn_action: shutter_kitchen_down
+              - button: !include
+                    file: check_button.yaml
+                    vars:
+                        btn_id: zsock1_btn
+                        col: 0
+                        row: 2
+                        btn_icon: $lightbulb
+                        btn_text: "Fenster"
+                        btn_action: switch_light_window
+              - button: !include
+                    file: push_button.yaml
+                    vars:
+                        page: 2
+                        col: 1
+                        row: 0
+                        btn_icon: "\U000F111E"
+                        btn_text: "WZ AUF"
+                        btn_action: shutter_living_up
+              - button: !include
+                    file: push_button.yaml
+                    vars:
+                        page: 2
+                        col: 1
+                        row: 1
+                        btn_icon: "\U000F111C"
+                        btn_text: "WZ ZU"
+                        btn_action: shutter_living_down
+              - button: !include
+                    file: check_button.yaml
+                    vars:
+                        btn_id: zsock2_btn
+                        col: 1
+                        row: 2
+                        btn_icon: $lightbulb
+                        btn_text: "Schrank"
+                        btn_action: switch_light_drawer
+              - button: !include
+                    file: push_button.yaml
+                    vars:
+                        page: 2
+                        col: 2
+                        row: 0
+                        btn_icon: $led_on
+                        btn_text: "LED Tom AN"
+                        btn_action: led_1_on
+              - button: !include
+                    file: push_button.yaml
+                    vars:
+                        page: 2
+                        col: 2
+                        row: 1
+                        btn_icon: $led_off
+                        btn_text: "LED Tom AUS"
+                        btn_action: led_1_off
+            #   - button: !include
+            #         file: push_button.yaml
+            #         vars:
+            #             page: 2
+            #             col: 2
+            #             row: 2
+            #             btn_icon: $question
+            #             btn_text: "button 2 2 2"
+            #             btn_action: no_op
+            #         hidden: true
+              - button: !include
+                    file: push_button.yaml
+                    vars:
+                        page: 2
+                        col: 3
+                        row: 0
+                        btn_icon: $led_on
+                        btn_text: "LED Mark AN"
+                        btn_action: led_2_on
+              - button: !include
+                    file: push_button.yaml
+                    vars:
+                        page: 2
+                        col: 3
+                        row: 1
+                        btn_icon: $led_off
+                        btn_text: "LED Mark AUS"
+                        btn_action: led_2_off
+              - button: !include
+                    file: check_button.yaml
+                    vars:
+                        btn_id: vacation_btn
+                        col: 3
+                        row: 2
+                        btn_icon: $airplane_takeoff
+                        btn_text: "Vacation"
+                        btn_action: switch_vacation

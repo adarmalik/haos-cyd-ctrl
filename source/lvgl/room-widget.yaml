@@ -1,0 +1,79 @@
+            #   - button:
+                  id: btn_${name}
+                  checkable: false
+                  grid_cell_column_pos: ${row} # place the widget in
+                  grid_cell_row_pos: ${col} # the corresponding cell
+                  grid_cell_x_align: STRETCH
+                  grid_cell_y_align: STRETCH
+                  on_press:
+                    then:
+                        - lambda: |-
+                            id(current_climate) = "${name}";
+                            id(current_setpoint) = id(${name}_temperature).state;
+                        - lvgl.label.update:
+                            id: label_climate_dialog_room_name
+                            text: ${label}
+                        - lvgl.roller.update:
+                            id: roller_climate_dialog_setpoint
+                            selected_index: !lambda |-
+                                float tmp = (id(current_setpoint) < 14.0f) ? 14.0f : (id(current_setpoint) > 23.0f ? 23.0f : id(current_setpoint));
+                                return int((tmp - 14.0)*2.0);
+                        # - lvgl.label.update:
+                        #     id: auto_temp_switch_label
+                        #     text: !lambda return std::string(lv_label_get_text(id(label_${name}_preset_mode)));
+                        - lvgl.button.update:
+                            id: auto_temp_switch
+                            state:
+                                checked: !lambda return id(${name}_preset_mode).get_state().back() == '1';
+                        - lvgl.label.update:
+                            id: auto_temp_switch_label
+                            text: !lambda |-
+                                return std::string(id(${name}_preset_mode).get_state().back() == '1' ? "#AAAAAA $house_temp2#" : "#AAAAAA $airplane_takeoff#");
+                        - lvgl.widget.show: climate_dialog
+                  widgets:
+                    - label:
+                        id: label_${name}_name
+                        text_font: roboto24
+                        text: ${label}
+                        align: TOP_MID
+                    - label:
+                        id: label_${name}_current_temperature
+                        text: "--.- °C"
+                        text_font: roboto18
+                        long_mode: dot
+                        align: LEFT_MID
+                        x: 0
+                    - label:
+                        id: label_${name}_temperature
+                        text: "--.- °C"
+                        text_font: roboto18
+                        long_mode: dot
+                        align: CENTER
+                        x: 0
+                    - label:
+                        id: label_${name}_current_humidity
+                        text: "--.- %"
+                        text_font: roboto18
+                        long_mode: dot
+                        align: RIGHT_MID
+                        x: 0
+                    - label:
+                        id: label_${name}_preset_mode
+                        text: $question
+                        text_font: roboto24
+                        recolor: True
+                        align: BOTTOM_LEFT
+                        x: 5
+                    - label:
+                        id: label_${name}_window
+                        text: $question
+                        text_font: roboto24
+                        recolor: True
+                        align: BOTTOM_MID
+                    - label:
+                        id: label_${name}_heating
+                        text: $question
+                        text_font: roboto24
+                        recolor: True
+                        align: BOTTOM_RIGHT
+                        x: -5

@@ -1,0 +1,12 @@
+  # - platform: homeassistant
+    id: ${room}_preset_mode
+    entity_id: ${entity}
+    attribute: preset_mode
+
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: label_${room}_preset_mode
+            text: 
+              format: "%s"
+              args: ['x.c_str()']

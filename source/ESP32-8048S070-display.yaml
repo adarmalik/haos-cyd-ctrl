@@ -1,0 +1,26 @@
+display:
+  - platform: rpi_dpi_rgb
+    id: my_display
+    color_order: RGB
+    invert_colors: True
+    update_interval: never
+    auto_clear_enabled: false
+    dimensions:
+      width: 800
+      height: 480
+    de_pin: 41
+    hsync_pin: 39
+    vsync_pin: 40
+    pclk_pin: 42
+    pclk_inverted: true
+    hsync_front_porch: 210
+    hsync_pulse_width: 30
+    hsync_back_porch: 16
+    vsync_front_porch: 22
+    vsync_pulse_width: 13
+    vsync_back_porch: 10
+    pclk_frequency: 30MHz
+    data_pins:
+      red: [14, 21, 47, 48, 45]
+      green: [9, 46, 3, 8, 16, 1]
+      blue: [15, 7, 6, 5, 4]

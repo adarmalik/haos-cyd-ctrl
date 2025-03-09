@@ -1,0 +1,88 @@
+sensor:
+  - platform: homeassistant
+    id: ${room}_temperature
+    entity_id: ${climate_entity}
+    attribute: temperature
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: label_${room}_temperature
+            text: 
+              format: "%.1f °C"
+              args: ['x']
+        - logger.log:
+            format: "%s: %f"
+            args: ['"label_${room}_temperature"', 'x']
+  - platform: homeassistant
+    id: ${room}_current_temperature
+    entity_id: ${climate_entity}
+    attribute: current_temperature
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: label_${room}_current_temperature
+            text: 
+              format: "%.1f °C"
+              args: ['x']
+        - logger.log:
+            format: "%s: %f"
+            args: ['"label_${room}_current_temperature"', 'x']
+  - platform: homeassistant
+    id: ${room}_current_humidity
+    entity_id: ${climate_entity}
+    attribute: current_humidity
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: label_${room}_current_humidity
+            text: 
+              format: "%.1f %%"
+              args: ['x']
+        - logger.log:
+            format: "%s: %f"
+            args: ['"label_${room}_current_humidity"', 'x']
+
+switch:
+  - platform: homeassistant
+    id: ${room}_heating
+    entity_id: ${heating_entity}
+    on_turn_on:
+      then:
+        - lvgl.label.update:
+            id: label_${room}_heating
+            text: "#FFBD00 \U000F0238#"
+    on_turn_off:
+      then:
+        - lvgl.label.update:
+            id: label_${room}_heating
+            text: "#AAAAAA \U000F1722#"
+
+binary_sensor:
+  - platform: homeassistant
+    id: ${room}_window
+    entity_id: ${window_entity}
+    publish_initial_state: true
+    on_state:
+      then:
+        - lvgl.label.update:
+            id: label_${room}_window
+            text: !lambda |-
+              return std::string(x ? "\U000F11DC" : "#AAAAAA \U000F11DB#");
+
+text_sensor:
+  - platform: homeassistant
+    id: ${room}_preset_mode
+    entity_id: ${climate_entity}
+    attribute: preset_mode
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: label_${room}_preset_mode
+            text: !lambda |-
+              std::string ret = "$question";
+              if(x.back() == '1'){
+                ret = "$house_temp2";
+              } else if(x.back() == '2') {
+                ret = "$airplane_takeoff";
+              }
+              return "#AAAAAA " + ret + "#";

@@ -1,0 +1,47 @@
+substitutions:
+  lightbulb: "\U000F1802"
+  boiler_on: "\U000F0238"
+  boiler_off: "\U000F1722"
+  radiator: "\U000F0438"
+  ceiling_light: "\U000F0769"
+  house_temp: "\U000F0F55"
+  house_temp2: "\U000F0F54"
+  airplane_takeoff: "\U000F001D"
+  question: "\U000F02D7"
+  led_on: "\U000F032C"
+  led_off: "\U000F032B"
+
+packages:
+  presentation: !include lvgl/lvgl_base.yaml
+  assets: !include assets.yaml
+  room-sensors: !include rooms.yaml
+
+  zsock1: !include
+    file: switch_sensor.yaml
+    vars:
+      name: zsock1
+  zsock2: !include
+    file: switch_sensor.yaml
+    vars:
+      name: zsock2
+  vacation: !include
+    file: switch_sensor.yaml
+    vars:
+      name: vacation
+  
+
+globals:
+  - id: current_climate
+    type: std::string
+
+  - id: current_setpoint
+    type: float
+
+api:
+  encryption:
+    key: !secret encryption_key
+
+binary_sensor:
+  - platform: status
+    name: "Status"
+    entity_category: diagnostic

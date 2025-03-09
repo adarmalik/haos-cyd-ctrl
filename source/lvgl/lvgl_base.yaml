@@ -1,0 +1,22 @@
+packages:
+  lvgl_display: !include lvgl_display.yaml
+  lvgl_theme: !include lvgl_theme.yaml
+  lvgl_ui: !include lvgl_ui.yaml
+
+script:
+  - id: apply_climate_settings
+    then:
+      - logger.log:
+          format: "%s: %f %d"
+          args: ['id(current_climate).c_str()', 'id(current_setpoint)', 'lv_obj_has_state(id(auto_temp_switch), LV_STATE_CHECKED)']
+      - homeassistant.service:
+          service: climate.set_temperature
+          data_template:
+            temperature: !lambda return id(current_setpoint);
+            entity_id: !lambda return "climate.wth_" + id(current_climate);
+      - homeassistant.service:
+          service: climate.set_preset_mode
+          data_template:
+            preset_mode: !lambda |-
+              return std::string(lv_obj_has_state(id(auto_temp_switch), LV_STATE_CHECKED) ? "week_program_1": "week_program_2");
+            entity_id: !lambda return "climate.wth_" + id(current_climate);

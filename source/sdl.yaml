@@ -1,0 +1,31 @@
+esphome:
+  name: "${name}"
+  friendly_name: "${friendly_name}"
+
+  on_boot:
+    priority: -100
+    then:
+      - delay: 5s
+      - lvgl.widget.hide: boot_screen
+
+host:
+  mac_address: "62:23:45:AF:B3:01"
+
+touchscreen:
+  - platform: sdl
+    id: my_touchscreen
+    display: my_display
+
+display:
+  - platform: sdl
+    id: my_display
+    update_interval: never
+    auto_clear_enabled: false
+    dimensions:
+      width: 800
+      height: 480
+
+script:
+  - id: backlight_off
+    then:
+      - logger.log: "backlight off"

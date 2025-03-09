@@ -1,0 +1,25 @@
+            #   - button:
+                  id: ${btn_id}
+                  checkable: true
+                  grid_cell_column_pos: ${col} # place the widget in
+                  grid_cell_row_pos: ${row} # the corresponding cell
+                  grid_cell_x_align: STRETCH
+                  grid_cell_y_align: STRETCH
+                  widgets:
+                    - label:
+                        text_font: btn_icons_font
+                        text: ${btn_icon}
+                        align: CENTER
+                        y: -20
+                    - label:
+                        text_font: roboto18
+                        text: ${btn_text}
+                        long_mode: dot
+                        align: CENTER
+                        y: 30
+                  on_click:
+                    - script.execute: ${btn_action}
+                #     - homeassistant.service:
+                #         service: automation.trigger
+                #         data: 
+                #           entity_id: automation.shutter_up

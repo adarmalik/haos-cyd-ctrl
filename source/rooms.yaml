@@ -1,0 +1,64 @@
+packages:
+  office: !include
+    file: room.yaml
+    vars:
+      room: office
+      climate_entity: climate.wth_office
+      window_entity: binary_sensor.swdm_az
+      heating_entity: switch.hmipw_drs8_00161d898d5ad1_sw11
+  kitchen: !include
+    file: room.yaml
+    vars:
+      room: kuche
+      climate_entity: climate.wth_kuche
+      window_entity: binary_sensor.swdm_kuche
+      heating_entity: switch.hmipw_drs8_00161be99ea65f_hmipw_drs8_sw7
+  wz: !include
+    file: room.yaml
+    vars:
+      room: wz
+      climate_entity: climate.wth_wz
+      window_entity: binary_sensor.fensterkontakt_balkon_balkontur
+      heating_entity: switch.hmipw_drs8_00161be99ea65f_hmipw_drs8_sw8
+  sz: !include
+    file: room.yaml
+    vars:
+      room: sz
+      climate_entity: climate.wth_sz
+      window_entity: binary_sensor.fensterkontakt_sz_fenster_schlafzimmer
+      heating_entity: switch.hmipw_drs8_00161d898d5ad1_sw9
+  mark: !include
+    file: room.yaml
+    vars:
+      room: mark
+      climate_entity: climate.wth_mark
+      window_entity: binary_sensor.mark_window_state
+      heating_entity: switch.hmipw_drs8_00161be99ea65f_hmipw_drs8_sw5
+  tom: !include
+    file: room.yaml
+    vars:
+      room: tom
+      climate_entity: climate.wth_tom
+      window_entity: binary_sensor.fensterkontakt_tom_tom_fenster_links
+      heating_entity: switch.hmipw_drs8_00161be99ea65f_hmipw_drs8_sw4
+  badalt: !include
+    file: room.yaml
+    vars:
+      room: bad_alt
+      climate_entity: climate.wth_bad_alt
+      window_entity: binary_sensor.swdm_bad_alt
+      heating_entity: switch.hmipw_drs8_00161be99ea65f_hmipw_drs8_sw6
+  badneu: !include
+    file: room.yaml
+    vars:
+      room: bad_neu
+      climate_entity: climate.wth_bad_neu
+      window_entity: binary_sensor.swdm_bad_neu
+      heating_entity: switch.hmipw_drs8_00161be99ea65f_hmipw_drs8_sw3
+  kammer: !include
+    file: room.yaml
+    vars:
+      room: wc
+      climate_entity: climate.wth_wc
+      window_entity: binary_sensor.fensterkontakt_wc
+      heating_entity: switch.hmipw_drs8_00161d898d5ad1_sw10

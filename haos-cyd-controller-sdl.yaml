@@ -1,0 +1,9 @@
+substitutions:
+  name: "haos-cyd-controller-sdl"
+  friendly_name: "CYD SDL"
+  device_description: "Homeassistant Dashboard on CYD-SDL Emulator"
+
+packages:
+  base: !include source/base.yaml
+  env: !include source/env-int.yaml
+  device: !include source/sdl.yaml
