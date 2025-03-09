@@ -1,0 +1,115 @@
+#-------------------------------------------
+# Graphicsd and Fonts
+#-------------------------------------------
+image:
+  - file: 'source/images/back1.png'
+    id: back1
+    type: RGB565
+  
+  - file: 'source/images/back72.png'
+    id: back7
+    type: RGB565
+  
+  - file: 'source/images/ha_logo.png'
+    id: boot_logo
+    resize: 200x200
+    type: RGB565
+    use_transparency: true
+    
+font:
+  - file: "gfonts://Roboto"
+    id: roboto24
+    size: 24
+    bpp: 4
+    glyphsets:
+      - GF_Latin_Core
+    extras:
+      - file: 'source/fonts/materialdesignicons-webfont.ttf' # http://materialdesignicons.com/cdn/7.4.47/ 
+        glyphs: [
+          $boiler_on,
+          $boiler_off,
+          "\U000F11DB", # mdi-window-closed-variant
+          "\U000F11DC", # mdi-window-open-variant
+          $house_temp,
+          $house_temp2,
+          $airplane_takeoff,
+          $question
+          ]
+      # - file: "gfonts://Roboto"
+      #   glyphs: [
+      #     "ü",
+      #     "ä",
+      #     "ö"          
+      #   ]
+
+  - file: 'source/fonts/materialdesignicons-webfont.ttf' # http://materialdesignicons.com/cdn/7.4.47/ 
+    id: light32
+    size: 32
+    bpp: 4
+    glyphs: [
+      $house_temp2,
+      $airplane_takeoff,
+      $question
+      ]
+    # extras:
+    #   - file: "gfonts://Roboto"
+    #     glyphs: [
+    #       "ü",
+    #       "ä",
+    #       "ö"          
+    #     ]
+
+  - file: "gfonts://Roboto"
+    id: roboto18
+    size: 18
+    bpp: 4
+    glyphsets:
+      - GF_Latin_Core
+    # extras:
+    #   - file: "gfonts://Roboto"
+    #     glyphs: [
+    #       "ü",
+    #       "ä",
+    #       "ö"          
+    #     ]
+
+  - file: "gfonts://Roboto"
+    id: btn_icons_font
+    size: 56
+    bpp: 4
+    glyphsets:
+      - GF_Latin_Core
+    extras:
+      - file: 'source/fonts/materialdesignicons-webfont.ttf' # http://materialdesignicons.com/cdn/7.4.47/ 
+        glyphs: [
+          $lightbulb,
+          $boiler_on,
+          $boiler_off,
+          $ceiling_light,
+          $question,
+          $airplane_takeoff,
+          $led_on,
+          $led_off,
+          "\U000F111C", #mdi-window-shutter
+          "\U000F111E"  #mdi-window-shutter-open
+        ]
+      # - file: "gfonts://Roboto"
+      #   glyphs: [
+      #     "ü",
+      #     "ä",
+      #     "ö"          
+      #   ]
+
+  - file: "gfonts://Roboto"
+    id: roboto90
+    size: 90
+    bpp: 4
+    glyphsets:
+      - GF_Latin_Core
+    # extras:
+    #   - file: "gfonts://Roboto"
+    #     glyphs: [
+    #       "ü",
+    #       "ä",
+    #       "ö"
+    #     ]

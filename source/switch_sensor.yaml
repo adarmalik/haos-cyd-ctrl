@@ -1,0 +1,11 @@
+binary_sensor:
+  - platform: homeassistant
+    id: ${name}_switch
+    entity_id: switch.${name}_schalter
+    publish_initial_state: true
+    on_state:
+      then:
+        lvgl.widget.update:
+          id: ${name}_btn
+          state:
+            checked: !lambda return x;

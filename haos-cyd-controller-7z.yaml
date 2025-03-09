@@ -1,0 +1,10 @@
+substitutions:
+  name: "haos-cyd-controller-7z"
+  friendly_name: "CYD Int 7z"
+  device_description: "Homeassistant Dashboard on CYD Integration 7 inch Device"
+
+packages:
+  base: !include source/base.yaml
+  env: !include source/env-int.yaml
+  device: !include source/ESP32-8048S.yaml
+  display: !include source/ESP32-8048S070-display.yaml

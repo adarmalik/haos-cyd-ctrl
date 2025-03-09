@@ -1,0 +1,21 @@
+            #   - button:
+                  id: btn_${page}_${col}_${row}
+                  checkable: false
+                  grid_cell_column_pos: ${col} # place the widget in
+                  grid_cell_row_pos: ${row} # the corresponding cell
+                  grid_cell_x_align: STRETCH
+                  grid_cell_y_align: STRETCH
+                  widgets:
+                    - label:
+                        text_font: btn_icons_font
+                        text: ${btn_icon}
+                        align: CENTER
+                        y: -20
+                    - label:
+                        text: ${btn_text}
+                        text_font: roboto18
+                        long_mode: dot
+                        align: CENTER
+                        y: 30
+                  on_click:
+                    - script.execute: ${btn_action}

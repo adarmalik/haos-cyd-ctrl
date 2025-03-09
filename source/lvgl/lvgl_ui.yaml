@@ -1,0 +1,362 @@
+lvgl:
+  top_layer:
+    widgets:
+      - buttonmatrix:
+          align: bottom_mid
+          styles: header_footer
+          pad_all: 0
+          outline_width: 0
+          id: top_layer
+          items:
+            styles: header_footer
+          rows:
+            - buttons:
+              - id: page_prev
+                text: "\uF053"
+                on_press:
+                  then:
+                    lvgl.page.previous:
+              - id: page_home
+                text: "\uF015"
+                on_press:
+                  then:
+                    - lvgl.page.show: main_page
+              - id: page_next
+                text: "\uF054"
+                on_press:
+                  then:
+                    lvgl.page.next:
+      - obj:
+          id: boot_screen
+          x: 0
+          y: 0
+          width: 100%
+          height: 100%
+          bg_color: 0x000000
+          bg_opa: COVER
+          radius: 0
+          pad_all: 0
+          border_width: 0
+          widgets:
+            - image:
+                align: CENTER
+                src: boot_logo
+                y: -40
+            - spinner:
+                align: CENTER
+                y: 95
+                height: 50
+                width: 50
+                spin_time: 1s
+                arc_length: 60deg
+                arc_width: 8
+                indicator:
+                  arc_color: 0x18bcf2
+                  arc_width: 8
+          on_press:
+            - lvgl.widget.hide: boot_screen
+      - obj:
+          id: climate_dialog
+          hidden: True
+          x: 0
+          y: 0
+          width: 100%
+          height: 100%
+          bg_color: 0x000000
+          bg_opa: COVER
+          radius: 0
+          pad_all: 0
+          border_width: 0
+          widgets:
+            - image:
+                align: CENTER
+                src: back1
+                zoom: 2.0
+            - label:
+                align: TOP_MID
+                id: label_climate_dialog_room_name
+                text: "-"
+                text_font: roboto90
+                text_color: 0xFFFFFF
+                y: 10
+            - roller:
+                align: CENTER
+                id: roller_climate_dialog_setpoint
+                visible_row_count: 5
+                x: 100
+                on_change:
+                  then:
+                    - lambda: id(current_setpoint) = 14+0.5*x;
+                options:
+                  - 14.0
+                  - 14.5
+                  - 15.0
+                  - 15.5
+                  - 16.0
+                  - 16.5
+                  - 17.0
+                  - 17.5
+                  - 18.0
+                  - 18.5
+                  - 19.0
+                  - 19.5
+                  - 20.0
+                  - 20.5
+                  - 21.0
+                  - 21.5
+                  - 22.0
+                  - 22.5
+                  - 23.0
+            - button:
+                id: auto_temp_switch
+                checkable: True
+                align: CENTER
+                width: 200
+                height: 100
+                x: -105
+                y: -55
+                widgets:
+                  - label:
+                      id: auto_temp_switch_label
+                      text: $question
+                      long_mode: dot
+                      text_font: light32
+                      recolor: True
+                      align: CENTER
+                on_change:
+                  then:
+                    - lvgl.label.update:
+                        id: auto_temp_switch_label
+                        text: !lambda |-
+                          std::string ret = "$question";
+                          if(x){
+                            ret = "$house_temp2";
+                          } else {
+                            ret = "$airplane_takeoff";
+                          }
+                          return "#AAAAAA " + ret + "#";
+            - button:
+                id: window_state
+                align: CENTER
+                x: -105
+                y: 55
+                width: 200
+                height: 100
+            - button:
+                id: ok_button
+                bg_opa: 90%
+                align: BOTTOM_MID
+                height: 60
+                width: 200
+                x: -105
+                y: -10
+                on_press:
+                  - script.execute: apply_climate_settings
+                  - lvgl.widget.hide: climate_dialog
+                widgets:
+                    - label:
+                        text: "OK"
+                        long_mode: dot
+                        align: CENTER
+            - button:
+                id: cancel_button
+                bg_opa: 90%
+                align: BOTTOM_MID
+                height: 60
+                width: 200
+                x: 105
+                y: -10
+                on_press:
+                  - lvgl.widget.hide: climate_dialog
+                widgets:
+                    - label:
+                        text: "CANCEL"
+                        long_mode: dot
+                        align: CENTER
+
+  page_wrap: true
+  pages:
+    - id: main_page
+      widgets:
+        - image:
+            align: CENTER
+            src: back7
+            zoom: 2.0
+        - obj:
+            layout:
+              type: GRID # split the rows and the columns proportionally
+              grid_columns: [FR(1), FR(1), FR(1)] # equal
+              grid_rows: [FR(33), FR(33), FR(33)] # like percents
+              pad_row: 2
+              pad_column: 2
+            bg_opa: TRANSP
+            # border_opa: TRANSP
+            border_width: 0
+            pad_all: 0
+            width: 796
+            height: 436
+            align: TOP_LEFT
+            x: 2
+            y: 2
+            widgets:
+              - button: !include 
+                  file: room-widget.yaml
+                  vars:
+                    row: 0
+                    col: 0
+                    name: "wz"
+                    label: "Wohnzimmer"
+              - button: !include 
+                  file: room-widget.yaml
+                  vars:
+                    row: 0
+                    col: 1
+                    name: "sz"
+                    label: "Schlafzimmer"
+              - button: !include 
+                  file: room-widget.yaml
+                  vars:
+                    row: 0
+                    col: 2
+                    name: "office"
+                    label: "Arbeitszimmer"
+              - button: !include 
+                  file: room-widget.yaml
+                  vars:
+                    row: 1
+                    col: 0
+                    name: "kuche"
+                    label: "Küche"
+              - button: !include 
+                  file: room-widget.yaml
+                  vars:
+                    row: 1
+                    col: 1
+                    name: "tom"
+                    label: "Tom"
+              - button: !include 
+                  file: room-widget.yaml
+                  vars:
+                    row: 1
+                    col: 2
+                    name: "mark"
+                    label: "Mark"
+              - button: !include 
+                  file: room-widget.yaml
+                  vars:
+                    row: 2
+                    col: 0
+                    name: "bad_neu"
+                    label: "Bad (neu)"
+              - button: !include 
+                  file: room-widget.yaml
+                  vars:
+                    row: 2
+                    col: 1
+                    name: "bad_alt"
+                    label: "Bad (alt)"
+              - button: !include 
+                  file: room-widget.yaml
+                  vars:
+                    row: 2
+                    col: 2
+                    name: "wc"
+                    label: "WC"
+
+    # - id: buttons_page_1
+    #   widgets:
+    #     - image:
+    #         align: CENTER
+    #         src: back7
+    #         zoom: 2.0
+    #     - obj: !include lvgl_ui_button_page1.yaml
+
+    - id: buttons_page_2
+      widgets:
+        - image:
+            align: CENTER
+            src: back7
+            zoom: 2.0
+        - obj: !include lvgl_ui_button_page2.yaml
+
+script:
+  - id: no_op
+    then:
+        - logger.log: "no op script"
+
+  - id: switch_light_window
+    then:
+      - homeassistant.service:
+          service: switch.toggle
+          data: 
+            entity_id: switch.zsock1_schalter
+
+  - id: switch_light_drawer
+    then:
+      - homeassistant.service:
+          service: switch.toggle
+          data: 
+            entity_id: switch.zsock2_schalter
+
+  - id: shutter_kitchen_down
+    then:
+      - homeassistant.service:
+          service: automation.trigger
+          data: 
+            entity_id: automation.shutter_kitchen_down
+
+  - id: shutter_kitchen_up
+    then:
+      - homeassistant.service:
+          service: automation.trigger
+          data: 
+            entity_id: automation.shutter_kitchen_up
+
+  - id: shutter_living_down
+    then:
+      - homeassistant.service:
+          service: automation.trigger
+          data: 
+            entity_id: automation.shutter_living_down
+
+  - id: shutter_living_up
+    then:
+      - homeassistant.service:
+          service: automation.trigger
+          data: 
+            entity_id: automation.shutter_living_up
+
+  - id: switch_vacation
+    then:
+      - homeassistant.service:
+          service: switch.toggle
+          data: 
+            entity_id: switch.vacation_schalter
+
+  - id: led_1_on
+    then:
+      - homeassistant.service:
+          service: button.press
+          data: 
+            entity_id: button.led_1_on
+
+  - id: led_1_off
+    then:
+      - homeassistant.service:
+          service: button.press
+          data: 
+            entity_id: button.led_1_off
+
+  - id: led_2_on
+    then:
+      - homeassistant.service:
+          service: button.press
+          data: 
+            entity_id: button.led_2_on_2
+
+  - id: led_2_off
+    then:
+      - homeassistant.service:
+          service: button.press
+          data: 
+            entity_id: button.led_2_off_2

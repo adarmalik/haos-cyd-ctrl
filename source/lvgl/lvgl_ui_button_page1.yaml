@@ -1,0 +1,153 @@
+#        - obj: # a properly placed coontainer object for all these controls
+            layout: # enable the GRID layout for the children widgets
+              type: GRID # split the rows and the columns proportionally
+              grid_columns: [FR(1), FR(1), FR(1)] # equal
+              grid_rows: [FR(50), FR(50)] # like percents
+            # width: 100%
+            # height: 85%
+            pad_all: 15
+            # pad_top: 20
+            border_width: 0
+            width: 796
+            height: 436
+            bg_opa: TRANSP
+            border_opa: TRANSP
+            widgets:
+              - button:
+                  id: zsock1_btn_old
+                  checkable: true
+                  grid_cell_column_pos: 0 # place the widget in
+                  grid_cell_row_pos: 0 # the corresponding cell
+                  grid_cell_x_align: STRETCH
+                  grid_cell_y_align: STRETCH
+                  widgets:
+                    - label:
+                        text_font: btn_icons_font
+                        text: $lightbulb
+                        align: CENTER
+                        y: -20
+                    - label:
+                        text: "Fenster"
+                        long_mode: dot
+                        align: CENTER
+                        y: 30
+                  on_click:
+                    - homeassistant.service:
+                        service: switch.toggle
+                        data: 
+                          entity_id: switch.zsock1_schalter
+              - button:
+                  id: zsock2_btn_old
+                  checkable: true
+                  grid_cell_column_pos: 0 # place the widget in
+                  grid_cell_row_pos: 1 # the corresponding cell
+                  grid_cell_x_align: STRETCH
+                  grid_cell_y_align: STRETCH
+                  widgets:
+                    - label:
+                        text_font: btn_icons_font
+                        text: $lightbulb
+                        align: CENTER
+                        y: -20
+                    - label:
+                        text: "Schrank"
+                        long_mode: dot
+                        align: CENTER
+                        y: 30
+                  on_click:
+                    - homeassistant.service:
+                        service: switch.toggle
+                        data: 
+                          entity_id: switch.zsock2_schalter
+              - button:
+                  id: no3_btn
+                  checkable: false
+                  grid_cell_column_pos: 1 # place the widget in
+                  grid_cell_row_pos: 0 # the corresponding cell
+                  grid_cell_x_align: STRETCH
+                  grid_cell_y_align: STRETCH
+                  widgets:
+                    - label:
+                        text_font: btn_icons_font
+                        text: "\U000F111C"
+                        align: CENTER
+                        y: -20
+                    - label:
+                        text: "Jalousie zu"
+                        long_mode: dot
+                        align: CENTER
+                        y: 30
+                  on_click:
+                    - homeassistant.service:
+                        service: automation.trigger
+                        data: 
+                          entity_id: automation.shutter_down
+              - button:
+                  id: no4_btn
+                  checkable: false
+                  grid_cell_column_pos: 1 # place the widget in
+                  grid_cell_row_pos: 1 # the corresponding cell
+                  grid_cell_x_align: STRETCH
+                  grid_cell_y_align: STRETCH
+                  widgets:
+                    - label:
+                        text_font: btn_icons_font
+                        text: "\U000F111E"
+                        align: CENTER
+                        y: -20
+                    - label:
+                        text: "Jalousie auf"
+                        long_mode: dot
+                        align: CENTER
+                        y: 30
+                  on_click:
+                    - homeassistant.service:
+                        service: automation.trigger
+                        data: 
+                          entity_id: automation.shutter_up
+              - button:
+                  id: vacation_btn_old
+                  checkable: true
+                  grid_cell_column_pos: 2 # place the widget in
+                  grid_cell_row_pos: 0 # the corresponding cell
+                  grid_cell_x_align: STRETCH
+                  grid_cell_y_align: STRETCH
+                  widgets:
+                    - label:
+                        text_font: btn_icons_font
+                        text: "$airplane_takeoff"
+                        align: CENTER
+                        y: -20
+                    - label:
+                        text: "Vacation"
+                        long_mode: dot
+                        align: CENTER
+                        y: 30
+                  on_click:
+                    - homeassistant.service:
+                        service: switch.toggle
+                        data: 
+                          entity_id: switch.vacation_schalter
+              - button:
+                  id: no6_btn
+                  checkable: false
+                  grid_cell_column_pos: 2 # place the widget in
+                  grid_cell_row_pos: 1 # the corresponding cell
+                  grid_cell_x_align: STRETCH
+                  grid_cell_y_align: STRETCH
+                  widgets:
+                    - label:
+                        text_font: btn_icons_font
+                        text: $question
+                        align: CENTER
+                        y: -20
+                    - label:
+                        text: "tbd"
+                        long_mode: dot
+                        align: CENTER
+                        y: 30
+                  # on_click:
+                  #   - homeassistant.service:
+                  #       service: automation.trigger
+                  #       data: 
+                  #         entity_id: automation.shutter_up
